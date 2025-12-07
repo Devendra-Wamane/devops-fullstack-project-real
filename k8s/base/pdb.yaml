@@ -1,0 +1,13 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: devops-demo-pdb
+  namespace: devops-demo
+  labels:
+    app: devops-demo
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: devops-demo
+      component: api
