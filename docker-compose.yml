@@ -1,26 +1,28 @@
+version: '3.8'
+
 services:
-  api:
-    build:
-      context: ./app
-      dockerfile: Dockerfile
+  backend:
+    build: ./backend
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=development
       - PORT=3000
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
     restart: unless-stopped
 
-  nginx:
-    image: nginx:alpine
+  frontend:
+    build: ./frontend
     ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - "8080:80"
     depends_on:
-      - api
+      - backend
     restart: unless-stopped
+
+networks:
+  default:
+    name: devops-fullstack-net

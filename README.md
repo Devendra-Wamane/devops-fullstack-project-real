@@ -1,3 +1,34 @@
+# DevOps Fullstack Project
+
+This repository contains a small example fullstack application with a React frontend and a Node.js backend.
+
+- Frontend: served by Nginx (build in `frontend`)
+- Backend: minimal Express API (in `backend`)
+
+Quick start (requires Docker and Docker Compose):
+
+```bash
+# build and start both services
+docker-compose up --build
+
+# run in background
+docker-compose up --build -d
+
+# view logs
+docker-compose logs -f
+```
+
+Notes:
+- The `backend` service is built from the `backend/Dockerfile` and served on port `3000`.
+- Frontend is built by the Dockerfile in `frontend` and served on port `8080` (mapped to container port `80`).
+
+If you prefer to run the backend locally without Docker:
+
+```bash
+cd backend
+npm install
+npm start
+```
 # DevOps Full-Stack Project 🚀
 
 A comprehensive DevOps project demonstrating industry best practices with **GitHub**, **Docker**, **Kubernetes**, **Terraform**, **AWS**, and **GitHub Actions**.

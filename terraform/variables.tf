@@ -1,4 +1,4 @@
-# ==================== General Variables ====================
+// Clean single variables file
 variable "project_name" {
   description = "Name of the project"
   type        = string
@@ -17,7 +17,7 @@ variable "aws_region" {
   default     = "ap-south-1"
 }
 
-# ==================== VPC Variables ====================
+# VPC variables
 variable "vpc_cidr" {
   description = "CIDR block for VPC"
   type        = string
@@ -42,7 +42,7 @@ variable "public_subnets" {
   default     = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 }
 
-# ==================== EKS Variables ====================
+# EKS variables
 variable "cluster_version" {
   description = "Kubernetes version"
   type        = string
@@ -73,7 +73,7 @@ variable "node_max_size" {
   default     = 5
 }
 
-# ==================== ECR Variables ====================
+# ECR variables
 variable "ecr_image_tag_mutability" {
   description = "Image tag mutability setting"
   type        = string
@@ -84,4 +84,17 @@ variable "ecr_scan_on_push" {
   description = "Enable image scanning on push"
   type        = bool
   default     = true
+}
+
+# GitHub variables
+variable "github_org" {
+  description = "GitHub organization or username"
+  type        = string
+  default     = "Devendra-Wamane"
+}
+
+variable "github_repo" {
+  description = "GitHub repository name"
+  type        = string
+  default     = "devops-fullstack-project"
 }

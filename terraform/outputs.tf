@@ -1,4 +1,14 @@
-# ==================== VPC Outputs ====================
+output "backend_ecr_uri" {
+  description = "ECR repository URI for the backend image"
+  value       = aws_ecr_repository.backend.repository_url
+}
+
+output "frontend_ecr_uri" {
+  description = "ECR repository URI for the frontend image"
+  value       = aws_ecr_repository.frontend.repository_url
+}
+
+# VPC Outputs
 output "vpc_id" {
   description = "VPC ID"
   value       = module.vpc.vpc_id
@@ -14,7 +24,7 @@ output "public_subnets" {
   value       = module.vpc.public_subnets
 }
 
-# ==================== EKS Outputs ====================
+# EKS Outputs
 output "cluster_name" {
   description = "EKS cluster name"
   value       = module.eks.cluster_name
@@ -41,24 +51,13 @@ output "cluster_certificate_authority_data" {
   sensitive   = true
 }
 
-# ==================== ECR Outputs ====================
-output "ecr_repository_url" {
-  description = "ECR repository URL"
-  value       = aws_ecr_repository.app.repository_url
-}
-
-output "ecr_repository_arn" {
-  description = "ECR repository ARN"
-  value       = aws_ecr_repository.app.arn
-}
-
-# ==================== IAM Outputs ====================
+# IAM Outputs
 output "github_actions_role_arn" {
   description = "IAM role ARN for GitHub Actions"
   value       = aws_iam_role.github_actions.arn
 }
 
-# ==================== Connection Commands ====================
+# Connection Commands
 output "configure_kubectl" {
   description = "Configure kubectl command"
   value       = "aws eks update-kubeconfig --region ${var.aws_region} --name ${module.eks.cluster_name}"
