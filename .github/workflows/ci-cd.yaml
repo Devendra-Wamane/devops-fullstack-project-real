@@ -29,9 +29,11 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       # -------- Backend Image --------
+
       - name: Build & Push Backend Image
         working-directory: backend
         run: |
+          if [ -z "${{ secrets.ECR_BACKEND_REPO }}" ]; then echo "ECR_BACKEND_REPO secret not set"; exit 1; fi
           docker build -t ${{ secrets.ECR_BACKEND_REPO }}:latest .
           docker push ${{ secrets.ECR_BACKEND_REPO }}:latest
 
@@ -39,6 +41,7 @@ jobs:
       - name: Build & Push Frontend Image
         working-directory: frontend
         run: |
+          if [ -z "${{ secrets.ECR_FRONTEND_REPO }}" ]; then echo "ECR_FRONTEND_REPO secret not set"; exit 1; fi
           docker build -t ${{ secrets.ECR_FRONTEND_REPO }}:latest .
           docker push ${{ secrets.ECR_FRONTEND_REPO }}:latest
 
