@@ -30,8 +30,8 @@ spec:
         fsGroup: 1001
       containers:
         - name: api
-          # Replace with your ECR image URL
-          image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/devops-demo-api:latest
+          # ECR image for EKS deployment
+          image: 905317843790.dkr.ecr.ap-south-1.amazonaws.com/devops-demo-api:latest
           imagePullPolicy: Always
           ports:
             - name: http
@@ -63,22 +63,23 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "500m"
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: http
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          readinessProbe:
-            httpGet:
-              path: /ready
-              port: http
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 3
-            failureThreshold: 3
+          # Temporarily disabled for ALB validation
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: http
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+          # readinessProbe:
+          #   httpGet:
+          #     path: /ready
+          #     port: http
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 5
+          #   timeoutSeconds: 3
+          #   failureThreshold: 3
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

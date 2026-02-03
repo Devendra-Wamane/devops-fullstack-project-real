@@ -1,3 +1,5 @@
+
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
@@ -5,19 +7,27 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const APP_NAME = process.env.APP_NAME || 'devops-fullstack-backend';
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const PORT = process.env.PORT || 3000;
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', app: APP_NAME, env: NODE_ENV });
+});
+
 app.get('/', (req, res) => {
-  res.send('Welcome to the backend API!');
+  res.json({ message: `Welcome to the backend API!`, app: APP_NAME });
 });
 
 app.get('/api', (req, res) => {
-  res.json({ message: 'Hello from backend!' });
+  res.json({ message: 'Hello from backend!', app: APP_NAME });
 });
 
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' });
-});
+if (NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`${APP_NAME} listening on port ${PORT}`);
+  });
+}
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Backend listening on port ${port}`);
-});
+module.exports = app;

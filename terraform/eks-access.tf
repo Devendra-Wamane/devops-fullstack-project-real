@@ -1,0 +1,1 @@
+# EKS Access configuration - provider defined in providers.tf

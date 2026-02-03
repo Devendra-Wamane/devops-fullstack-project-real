@@ -17,6 +17,18 @@ variable "aws_region" {
   default     = "ap-south-1"
 }
 
+variable "cluster_name" {
+  description = "EKS cluster name"
+  type        = string
+  default     = "devops-demo"
+}
+
+variable "principal_arn" {
+  description = "IAM principal to grant access"
+  type        = string
+  default     = "arn:aws:iam::905317843790:root"
+}
+
 # VPC variables
 variable "vpc_cidr" {
   description = "CIDR block for VPC"
