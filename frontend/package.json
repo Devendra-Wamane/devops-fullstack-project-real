@@ -17,6 +17,9 @@
     "react-dom": "^18.0.0",
     "react-scripts": "^5.0.0"
   },
+  "devDependencies": {
+    "typescript": "4.9.5"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
